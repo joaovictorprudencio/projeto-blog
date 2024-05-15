@@ -1,0 +1,36 @@
+package com.example.blog.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.blog.models.Usuario;
+import com.example.blog.repository.UsuarioRepository;
+
+@Service
+public class UsuarioService {
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    
+    public Usuario SalvarUsuario(Usuario usuario){
+        return  usuarioRepository.save(usuario);
+    }
+
+    public void DeletarUsuario(long id){
+      usuarioRepository.deleteById(id);
+    }
+
+    public Optional<Usuario> BuscarPorId(long id){
+        return  usuarioRepository.findById(id);
+    }  
+
+    public Usuario AtualizarDados(long id ,Usuario usuario){
+        Optional<Usuario> UsuarioOptional = BuscarPorId(id);
+        Usuario UsuarioUpdate = UsuarioOptional.get();
+        UsuarioUpdate.setNome(usuario.getNome());
+        return UsuarioUpdate;   
+    }
+
+}
+
