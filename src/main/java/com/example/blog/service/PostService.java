@@ -13,8 +13,11 @@ public class PostService {
    PostRepository postRepository;
 
    
-public Post CriarPost(Post post){
+public Post NovoPost(Post post){
      return postRepository.save(post);
  }
+
+
+
 }
 
