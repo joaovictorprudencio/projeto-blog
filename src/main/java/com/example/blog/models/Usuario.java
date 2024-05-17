@@ -4,6 +4,8 @@ package com.example.blog.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,7 @@ public class Usuario {
     private String nome;
 
     @OneToMany(mappedBy="usuario")
+    @JsonManagedReference
     private List<Post> post; 
     
 

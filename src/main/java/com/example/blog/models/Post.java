@@ -2,10 +2,14 @@ package com.example.blog.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 
@@ -17,6 +21,8 @@ public class Post {
     private Long id;
 
     @ManyToOne 
+    @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
     private String titulo ;
