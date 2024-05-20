@@ -47,7 +47,7 @@ public class UsuarioService {
             } else {
                 throw new Exception("Usuário com ID " + id + " não encontrado");
             }
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             System.err.println("Erro ao criar post: " + ex.getMessage());
             return null;
         }
