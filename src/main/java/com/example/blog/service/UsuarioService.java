@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.blog.models.Post;
 import com.example.blog.models.Usuario;
+import com.example.blog.repository.PostRepository;
 import com.example.blog.repository.UsuarioRepository;
 
 @Service
@@ -13,8 +14,11 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
     
+ 
     @Autowired
-    PostService postService;
+    PostRepository postRepository;
+
+    
 
     
     public Usuario SalvarUsuario(Usuario usuario){
@@ -43,7 +47,8 @@ public class UsuarioService {
             if (usuarioOptional.isPresent()) {
                 Usuario usuarioAutor = usuarioOptional.get();
                 post.setUsuario(usuarioAutor);
-                return postService.NovoPost(post);
+                Post postCriado = postRepository.save(post);
+                return postCriado;
             } else {
                 throw new Exception("Usuário com ID " + id + " não encontrado");
             }
