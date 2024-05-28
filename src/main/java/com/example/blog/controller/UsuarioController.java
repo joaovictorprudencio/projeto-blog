@@ -15,6 +15,9 @@ import com.example.blog.models.Post;
 import com.example.blog.models.Usuario;
 import com.example.blog.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @Controller
 public class UsuarioController {
@@ -23,7 +26,11 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
    
-
+    @Operation(summary = "criar um usuario")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuario criado com sucesso"),
+    @ApiResponse(responseCode = "504", description = "Erro na operação")
+    })
     @PostMapping("/criar")
     public ResponseEntity<Usuario> CriarUsuario(@RequestBody Usuario usuario) {
            try {
@@ -34,16 +41,13 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/criandoPost/{id}")
-    public ResponseEntity<Post> CriandoPost(@PathVariable Long id , @RequestBody Post post) {
-       try {
-           Post NovoPost = usuarioService.CriarPost(id, post);
-           return new ResponseEntity<>(NovoPost, HttpStatus.CREATED);
-       } catch (Exception e) {
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-       }
-    }
 
+
+    @Operation(summary = "Buscar um  Usuario")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Usuario encontrado "),
+    @ApiResponse(responseCode = "504", description = "Usuario não existe")
+    })
     @GetMapping("/usuario/{id}")
     public ResponseEntity<Usuario> BuscarUsuario(@PathVariable long id ){
         try{
@@ -58,6 +62,11 @@ public class UsuarioController {
 
     }
 
+    @Operation(summary = "postar um texto")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "post concluido com sucesso"),
+    @ApiResponse(responseCode = "504", description = "Erro na operação")
+    })
     @PostMapping("/novopost/{id}")
     public ResponseEntity<Post>NewPost(@PathVariable Long id,Post post ){
      try{
